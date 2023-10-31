@@ -3,14 +3,17 @@ import API from "./services/API.js"
 // it's using the curly braces because it's not the default
 //......export in that Menu.js file
 import { loadData } from "./services/Menu.js";
+import Router from "./services/Router.js";
 
 // making the Store global
 window.app = {}
 app.store = Store;
+app.router = Router;
 
 // it's better to wait for the event for manipulation
 window.addEventListener('DOMContentLoaded', ()=>{
     loadData();
+    app.router.init();
 
 });
 
