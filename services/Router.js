@@ -15,6 +15,13 @@ const Router = {
                 Router.go(url);
             })
         })
+
+        // Event handler for URL change..
+        //.. maybe this will remove the 404 error while refreshing in other page than the home
+        //.. it just solved the and forward button issue
+        window.addEventListener('popstate', event =>{
+            Router.go(event.state.route, false)
+        })
         // now check the initial url
         // .. location.pathname provides the current url
         Router.go(location.pathname);
@@ -37,6 +44,13 @@ const Router = {
                 pageElement = document.createElement('h1');
                 pageElement.textContent = 'Your Order';
                 break
+            default:
+                if(route.startsWith('/product-')){
+                    pageElement = document.createElement('h1');
+                    pageElement.textContent = 'Details';
+                    const paramId =route.subString(route.lastIndexOf('-')+1);
+                    pageElement.dataset.id = paramId;
+                }
         }
 
         if (pageElement){
