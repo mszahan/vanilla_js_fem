@@ -1,9 +1,18 @@
+import Store from "./services/Store.js"
+import API from "./services/API.js"
+// it's using the curly braces because it's not the default
+//......export in that Menu.js file
+import { loadData } from "./services/Menu.js";
+
+// making the Store global
+window.app = {}
+app.store = Store;
+
 // it's better to wait for the event for manipulation
 window.addEventListener('DOMContentLoaded', ()=>{
-    // let nav = document.querySelector('nav');
-    // console.log(nav)
+    loadData();
 
-})
+});
 
 
 // // you can create shorthand to use something big
