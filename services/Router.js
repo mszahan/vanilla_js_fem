@@ -37,16 +37,16 @@ const Router = {
         let pageElement = null;
         switch (route) {
             case '/':
-                pageElement = document.createElement('h1');
-                pageElement.textContent = 'Menu';
+                pageElement = document.createElement('menu-page');
+                // pageElement.textContent = 'Menu';
                 break
             case '/order':
-                pageElement = document.createElement('h1');
+                pageElement = document.createElement('order-page');
                 pageElement.textContent = 'Your Order';
                 break
             default:
                 if(route.startsWith('/product-')){
-                    pageElement = document.createElement('h1');
+                    pageElement = document.createElement('details-page');
                     pageElement.textContent = 'Details';
                     const paramId =route.subString(route.lastIndexOf('-')+1);
                     pageElement.dataset.id = paramId;

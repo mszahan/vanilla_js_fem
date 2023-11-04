@@ -5,6 +5,10 @@ import API from "./services/API.js"
 import { loadData } from "./services/Menu.js";
 import Router from "./services/Router.js";
 
+import { MenuPage } from "./components/MenuPage.js";
+import { DetailsPage } from './components/DetailsPage.js';
+import { OrderPage } from "./components/OrderPage.js";
+
 // making the Store global
 window.app = {}
 app.store = Store;
