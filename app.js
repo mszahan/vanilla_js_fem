@@ -9,6 +9,7 @@ import { MenuPage } from "./components/MenuPage.js";
 import { DetailsPage } from './components/DetailsPage.js';
 import { OrderPage } from "./components/OrderPage.js";
 import ProductItem from "./components/Productitem.js";
+import CartItem from "./components/CartItem.js";
 
 // making the Store global
 window.app = {}

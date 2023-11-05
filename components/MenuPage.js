@@ -29,7 +29,7 @@ export class MenuPage extends HTMLElement {
 
     render(){
         if (app.store.menu){
-            this.root.querySelector('#menu').innerHTML = '';
+            // this.root.querySelector('#menu').innerHTML = '';
             for (let category of app.store.menu){
                 const liCategory = document.createElement('li');
                 liCategory.innerHTML = `
