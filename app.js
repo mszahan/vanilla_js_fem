@@ -15,7 +15,7 @@ app.store = Store;
 app.router = Router;
 
 // it's better to wait for the event for manipulation
-window.addEventListener('DOMContentLoaded', ()=>{
+window.addEventListener('DOMContentLoaded', async ()=>{
     loadData();
     app.router.init();
 
