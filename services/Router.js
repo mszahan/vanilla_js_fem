@@ -1,71 +1,55 @@
 const Router = {
-    // in the init we are targeting all the nav link
-    //.... and preventing the default behaviour and later
-    //... we will make it like the react router
-    init: ()=> {
-        document.querySelectorAll('a.navlink').forEach(a => {
-            a.addEventListener('click', event => {
+    init: () => {
+        document.querySelectorAll("a.navlink").forEach(a => {
+            a.addEventListener("click", event => {
                 event.preventDefault();
-                // // it gets the whole url like localhost:...//
-                // const url = a.href
-
-                // // this only gets the value of the href like /order
-                // const url = a.getAttribute('href');
-                const url = event.target.getAttribute('href');
+                // const url1 = event.target.href;
+                const url = event.target.getAttribute("href");
                 Router.go(url);
-            })
+            });
         })
+        // Event Handler for URL changes
+        window.addEventListener("popstate", event => {
+            Router.go(event.state.route, false);
+        });
 
-        // Event handler for URL change..
-        //.. maybe this will remove the 404 error while refreshing in other page than the home
-        //.. it just solved the and forward button issue
-        window.addEventListener('popstate', event =>{
-            Router.go(event.state.route, false)
-        })
-        // now check the initial url
-        // .. location.pathname provides the current url
+        // Check the initial URL
         Router.go(location.pathname);
     },
     go: (route, addToHistory=true) => {
         console.log(`Going to ${route}`);
-        // now we are changing the url in browser url bar
-        if (addToHistory){
-            history.pushState({route}, '', route)
+
+        if (addToHistory) {
+            history.pushState({ route }, '', route);
         }
-        // now it's time for adding and removing content
-        //.......based on the router 
         let pageElement = null;
         switch (route) {
-            case '/':
-                pageElement = document.createElement('menu-page');
-                // pageElement.textContent = 'Menu';
-                break
-            case '/order':
-                pageElement = document.createElement('order-page');
-                pageElement.textContent = 'Your Order';
-                break
+            case "/":
+                pageElement = document.createElement("menu-page");
+                break;
+            case "/order":
+                pageElement = document.createElement("order-page");
+                break;
             default:
-                if(route.startsWith('/product-')){
-                    pageElement = document.createElement('details-page');
-                    pageElement.textContent = 'Details';
-                    const paramId =route.subString(route.lastIndexOf('-')+1);
-                    pageElement.dataset.id = paramId;
+                if (route.startsWith("/product-")) {
+                    pageElement = document.createElement("details-page");
+                    const paramId = route.substring(route.lastIndexOf("-")+1);
+                    pageElement.dataset.productId = paramId;
                 }
         }
-
-        if (pageElement){
-
-            // you can do that previous way but the next is better
-            // document.querySelector('main').children[0].remove();
-    
-            // delet the previous content before appending the new child
-            const cache = document.querySelector('main');
-            cache.innerHTML = '';
+        if (pageElement) {
+            // document.querySelector("main").children[0].remove();
+            const cache = document.querySelector("main");
+            cache.innerHTML = "";
             cache.appendChild(pageElement);
+            window.scrollX = 0;
+            window.scrollY = 0;
+
+        } else {
+            // 404
+            document.querySelector("main").innerHTML = "Oups, 404!"
+
         }
-
-
     }
 }
-
 export default Router;
